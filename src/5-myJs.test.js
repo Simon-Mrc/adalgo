@@ -58,10 +58,21 @@ suite("myJs", () => {
     });
 
     test("myObjectKeys", () => {
+        expect(myObjectKeys({x: undefined, y: null})).toEqual(["x", "y"]);
         expect(myObjectKeys({a: 1, b: 2})).toEqual(["a", "b"]);
         expect(myObjectKeys({})).toEqual([]);
         expect(myObjectKeys({x: undefined, y: null})).toEqual(["x", "y"]);
+        expect(myObjectKeys({name: "Alice", age: 30, city: "Paris"})).toEqual(["name", "age", "city"]);
+        expect(myObjectKeys({z: 0, y: false, x: ""})).toEqual(["z", "y", "x"]);
     });
 
     // TODO: test myObjectEntries
+    test("myObjectEntries", () => {
+        expect(myObjectEntries({a: 1, b: 2})).toEqual([['a', 1], ['b', 2]]);
+        expect(myObjectEntries({})).toEqual([]);
+        expect(myObjectEntries({x: undefined, y: null})).toEqual([["x", undefined], ["y", null]]);
+        expect(myObjectEntries({name: "Bob", active: true, score: 42})).toEqual([["name", "Bob"], ["active", true], ["score", 42]]);
+        expect(myObjectEntries({first: "hello", second: "world", third: 123})).toEqual([["first", "hello"], ["second", "world"], ["third", 123]]);
+
+    });
 });

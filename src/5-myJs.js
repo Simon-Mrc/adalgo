@@ -120,7 +120,24 @@ export function myJoin(array, separator){
  * @example
  *      myObjectKeys({a: 1, b: 2}); // returns ['a', 'b']
  */
-export const myObjectKeys = () => {};
+export function myObjectKeys(obj){
+    let keys = [];
+    let check = 0;
+    for (let propName in obj){
+// next seems useless but keeping it for science
+        /* for(let i = 0 ; i < keys.length ; i = i +1 ){
+            if(keys[i] === propName){
+                check = 1;
+                i = keys.length
+            }
+        }
+        if (check === 0){
+            keys.push(propName);
+        }*/
+       keys.push(propName);
+    }
+    return keys;
+};
 
 /**
  * This function re-implements the behavior of Object.entries()
@@ -133,4 +150,12 @@ export const myObjectKeys = () => {};
  *      myObjectEntries({a: 1, b: 2});
  *      // returns [['a', 1], ['b', 2]]
  */
-export const myObjectEntries = () => {};
+export function myObjectEntries(obj){
+    let result=[];
+    let resultmid=[];
+    for (let combin in obj){
+        resultmid = [combin , obj[combin]]; // Object are like array OMG the revelation
+        result.push(resultmid);
+    }
+    return result;
+};
