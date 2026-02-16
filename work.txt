@@ -1,0 +1,2 @@
+create array of text;
+create template of whats to replace with whats
