@@ -1,1 +1,0 @@
-console.log(['un', 'deux', 'troiqs', `trois`].indexOf('trois'));

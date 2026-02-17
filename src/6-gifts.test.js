@@ -323,7 +323,7 @@ suite("globalMostExpensive", () => {
         expect(preferedKid(kids)).toBe("D");
     });
 });
-/*
+
 suite("distributeGifts", () => {
     const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
@@ -503,4 +503,3 @@ suite("distributeGifts", () => {
         expect(kids[1].gifts[0].name).toBe("Small");
     });
 });
-*/

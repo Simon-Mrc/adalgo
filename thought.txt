@@ -9,3 +9,33 @@ most pricy item // function for that
 give gift // update kids gifts and remove from original list
 
 so : 1 roll thgough gifts list   
+
+function available : 
+globalMostExpensive(kids) // return the most pricy kid
+   
+// function that return the most expensive gift as an object   
+    let h = 0;
+    let currentPrice = 0;
+    for(let i = 0 ; i<gifts.length ; i = i +1){
+        if(gifts[i].price > currentPrice){
+            h=i;
+            currentPrice = gifts[i].price;
+        }
+    }
+    return gift[h];
+
+    function preferedKid(kids){
+    let result = ``;
+    let mostE = 0;
+    let k = O,
+    for (let i = 0 ; i<kids.length ; i = i + 1){
+        if (totalPrice(kids[i].gifts) > mostE){
+            mostE = totalPrice(kids[i].gifts) ;
+            k = i ;
+        }
+    }
+    if (result === ``){
+        return undefined;
+    }
+    return result;
+};

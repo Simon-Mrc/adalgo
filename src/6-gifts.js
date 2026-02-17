@@ -192,11 +192,34 @@ export function preferedKid(kids){
  * // gifts is now []
  */
 export function distributeGifts(gifts, kids){
-    const giftslength = gifts.length;
-    for (let i = 0 ; i < giftslength ; i = i+1){
-        let h = 0;
-
-
+    if (kids.length !=0){
+        const giftslength = gifts.length;
+        for (let i = 0 ; i < giftslength ; i = i+1){
+            let g = 0;
+            let currentPrice = 0;
+            for(let j = 0 ; j<gifts.length ; j = j +1){
+                if(gifts[j].price > currentPrice){
+                    g = j;
+                    currentPrice = gifts[j].price;
+                }
+            }// g is the index of most expensive gift so gifts[g] to use
+            let lessE = Infinity ;
+            let k = 0 ;
+            for (let j = 0 ; j<kids.length ; j = j + 1){
+                if (totalPrice(kids[j].gifts) < lessE){
+                    lessE = totalPrice(kids[j].gifts) ;
+                    k = j ;
+                }
+                if (totalPrice(kids[j].gifts) == lessE){
+                    lessE = totalPrice(kids[j].gifts) ;
+                    if (kids[k].behaviorScore < kids[j].behaviorScore){
+                        k = j;
+                    }
+                } 
+            } // k is the index of prefered kid
+            kids[k].gifts.push(gifts[g]);
+            gifts.splice(g , 1);
+        }// end of gifts reading loop
     }
-
+    return kids;
 };
