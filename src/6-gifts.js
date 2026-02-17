@@ -216,7 +216,7 @@ export function distributeGifts(gifts, kids){
                         k = j;
                     }
                 } 
-            } // k is the index of prefered kid
+            } // k is the index of least prefered kid
             kids[k].gifts.push(gifts[g]);
             gifts.splice(g , 1);
         }// end of gifts reading loop
