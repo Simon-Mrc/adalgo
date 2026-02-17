@@ -4,10 +4,17 @@
  * @example
  *      totalPrice([{name: 'iPhone', price: 800}, {name: 'skateboard', price: 70}]); // returns 870
  *
- * @param {{name: string; price: number}[]} gifts
+ * @param {[{name: string; price: number}]} gifts
  * @returns {number} total price
  */
-export const totalPrice = (gifts) => {};
+export function totalPrice(gifts){
+    let total = 0;
+    for(let i = 0 ; i<gifts.length ; i = i +1){
+        total = total + gifts[i].price;
+    }
+    return total;
+
+};
 
 /**
  * This function takes an array of gifts and returns the name of the most expensive one.
@@ -15,7 +22,17 @@ export const totalPrice = (gifts) => {};
  * @param {{name: string; price: number}[]} gifts
  * @returns {string} gift's name
  */
-export const mostExpensive = (gifts) => {};
+export function mostExpensive(gifts){
+    let mostE = ``;
+    let currentPrice = 0;
+    for(let i = 0 ; i<gifts.length ; i = i +1){
+        if(gifts[i].price > currentPrice){
+            mostE = gifts[i].name;
+            currentPrice = gifts[i].price;
+        }
+    }
+    return mostE;
+};
 
 /**
  * This function takes an array of kids and returns the name of the most expensive gift
@@ -33,11 +50,28 @@ export const mostExpensive = (gifts) => {};
  * @param {{name: string; gifts: {name: string; price: number}[]}[]} kids
  * @returns {string} gift's name
  */
-export const globalMostExpensive = (kids) => {};
+export function globalMostExpensive(kids){
+    let result = ``;
+    let resultInt = ``;
+    let mostE = 0 ;
+    let mostEInt = 0 ;
+    for (let i = 0 ; i < kids.length ; i = i + 1){
+        for (let j = 0 ; j<kids[i].gifts.length ; j = j + 1){
+            if (kids[i].gifts[j].price > mostEInt){
+                mostEInt = kids[i].gifts[j].price;
+                resultInt = kids[i].gifts[j].name; 
+            }
+        }
+        if (mostEInt > mostE){
+            result = resultInt;
+        }
+    }
+    return result;
+};
 
 /**
  * This function takes an array of kids and return the name of the kid that has
- * the most expensive gifts for christmas.
+ * the most expensive gifts summ for christmas.
  *
  * Each kid in an objet with a name and a list of gift.
  * Each give has a name and a price.
@@ -54,7 +88,22 @@ export const globalMostExpensive = (kids) => {};
  * @param {{name: string; gifts: {name: string; price: number}[]}[]} kids
  * @returns {string} kid's name
  */
-export const preferedKid = (kids) => {};
+export function preferedKid(kids){
+    let result = ``;
+    let resultInt = ``;
+    let mostE = 0;
+    let mostEInt = 0;
+    for (let i = 0 ; i<kids.length ; i = i + 1){
+        if (totalPrice(kids[i].gifts) > mostE){
+            mostE = totalPrice(kids[i].gifts) ;
+            result = kids[i].name
+        }
+    }
+    if (result === ``){
+        return undefined;
+    }
+    return result;
+};
 
 /**
  * Distributes a list of gifts among a list of kids.
@@ -142,4 +191,12 @@ export const preferedKid = (kids) => {};
  *
  * // gifts is now []
  */
-export const distributeGifts = (gifts, kids) => {};
+export function distributeGifts(gifts, kids){
+    const giftslength = gifts.length;
+    for (let i = 0 ; i < giftslength ; i = i+1){
+        let h = 0;
+
+
+    }
+
+};

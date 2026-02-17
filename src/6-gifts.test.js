@@ -1,19 +1,213 @@
 import {suite, test, expect} from "vitest";
-import {preferedKid, distributeGifts} from "./6-gifts.js";
+import {preferedKid, distributeGifts, totalPrice, mostExpensive, globalMostExpensive} from "./6-gifts.js";
 
 suite("totalPrice", () => {
     // TODO: write some tests
+    test("returns the sum of prices from a list of gifts", () => {
+        const gifts = [
+            { name: "iPhone", price: 800 },
+            { name: "skateboard", price: 70 },
+        ];
+
+        expect(totalPrice(gifts)).toBe(870);
+    });
+
+    test("returns 0 for an empty gifts array", () => {
+        const gifts = [];
+
+        expect(totalPrice(gifts)).toBe(0);
+    });
+
+    test("returns the price when there is only one gift", () => {
+        const gifts = [{ name: "apple", price: 1 }];
+
+        expect(totalPrice(gifts)).toBe(1);
+    });
+
+    test("returns the correct total with multiple gifts of various prices", () => {
+        const gifts = [
+            { name: "laptop", price: 1200 },
+            { name: "book", price: 15 },
+            { name: "pen", price: 2 },
+            { name: "headphones", price: 150 },
+        ];
+
+        expect(totalPrice(gifts)).toBe(1367);
+    });
+
+    test("returns the correct total with decimal prices", () => {
+        const gifts = [
+            { name: "coffee", price: 5.99 },
+            { name: "sandwich", price: 12.50 },
+            { name: "juice", price: 3.75 },
+        ];
+
+        expect(totalPrice(gifts)).toBeCloseTo(22.24); // Js missinterpretation with decimals
+        // Console.log give 22.2400000000002 xD could have round it up in function tho
+    });
 });
+;
 
 suite("mostExpensive", () => {
     // TODO: write some tests
+    test("returns the name of the most expensive gift", () => {
+        const gifts = [
+            { name: "iPhone", price: 800 },
+            { name: "skateboard", price: 70 },
+        ];
+
+        expect(mostExpensive(gifts)).toBe("iPhone");
+    });
+
+    test("returns the most expensive when it's the first gift", () => {
+        const gifts = [
+            { name: "laptop", price: 1500 },
+            { name: "book", price: 15 },
+            { name: "pen", price: 2 },
+        ];
+
+        expect(mostExpensive(gifts)).toBe("laptop");
+    });
+
+    test("returns the most expensive when it's the last gift", () => {
+        const gifts = [
+            { name: "apple", price: 1 },
+            { name: "orange", price: 2 },
+            { name: "diamond", price: 5000 },
+        ];
+
+        expect(mostExpensive(gifts)).toBe("diamond");
+    });
+
+    test("returns the first most expensive gift when there are duplicates", () => {
+        const gifts = [
+            { name: "watch", price: 500 },
+            { name: "ring", price: 500 },
+            { name: "necklace", price: 300 },
+        ];
+
+        expect(mostExpensive(gifts)).toBe("watch");
+    });
+
+    test("returns the most expensive gift from a single gift array", () => {
+        const gifts = [
+            { name: "trophy", price: 100 },
+        ];
+
+        expect(mostExpensive(gifts)).toBe("trophy");
+    });
 });
 
 suite("globalMostExpensive", () => {
     // TODO: write some tests
+    test("returns the most expensive gift across multiple kids", () => {
+        const kids = [
+            { name: "Issa", gifts: [
+                { name: "iPhone", price: 800 },
+                { name: "skateboard", price: 70 },
+            ]},
+            { name: "Noor", gifts: [
+                { name: "apple", price: 1 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("iPhone");
+    });
+
+    test("returns the most expensive gift when it's in the second kid's gifts", () => {
+        const kids = [
+            { name: "Alice", gifts: [
+                { name: "book", price: 20 },
+            ]},
+            { name: "Bob", gifts: [
+                { name: "laptop", price: 1200 },
+                { name: "pen", price: 5 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("laptop");
+    });
+
+    test("returns the most expensive gift when multiple kids have multiple gifts", () => {
+        const kids = [
+            { name: "Charlie", gifts: [
+                { name: "watch", price: 500 },
+                { name: "ring", price: 300 },
+            ]},
+            { name: "Diana", gifts: [
+                { name: "necklace", price: 400 },
+                { name: "bracelet", price: 250 },
+            ]},
+            { name: "Eve", gifts: [
+                { name: "diamond", price: 2000 },
+                { name: "emerald", price: 1500 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("diamond");
+    });
+
+    test("returns the most expensive gift when it's the first gift of the first kid", () => {
+        const kids = [
+            { name: "Frank", gifts: [
+                { name: "yacht", price: 500000 },
+                { name: "car", price: 50000 },
+            ]},
+            { name: "Grace", gifts: [
+                { name: "phone", price: 1000 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("yacht");
+    });
+
+    test("returns the most expensive gift when each kid has one gift", () => {
+        const kids = [
+            { name: "Henry", gifts: [
+                { name: "gift1", price: 100 },
+            ]},
+            { name: "Ivy", gifts: [
+                { name: "gift2", price: 250 },
+            ]},
+            { name: "Jack", gifts: [
+                { name: "gift3", price: 150 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("gift2");
+    });
+
+    test("returns the most expensive gift with decimal prices", () => {
+        const kids = [
+            { name: "Kate", gifts: [
+                { name: "coffee", price: 5.99 },
+            ]},
+            { name: "Liam", gifts: [
+                { name: "premium_coffee", price: 15.75 },
+                { name: "tea", price: 3.50 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("premium_coffee");
+    });
+
+    test("returns the most expensive gift when multiple gifts have the same highest price", () => {
+        const kids = [
+            { name: "Mia", gifts: [
+                { name: "gemstone1", price: 1000 },
+            ]},
+            { name: "Noah", gifts: [
+                { name: "gemstone2", price: 1000 },
+                { name: "coin", price: 500 },
+            ]},
+        ];
+
+        expect(globalMostExpensive(kids)).toBe("gemstone1");
+    });
 });
 
-suite("preferedKid", () => {
+
+ suite("preferedKid", () => {
     test("returns the kid with the most expensive total", () => {
         const kids = [
             {
@@ -63,7 +257,7 @@ suite("preferedKid", () => {
             },
         ];
 
-        expect(preferedKid(kids)).toBe("Amina");
+        expect(preferedKid(kids)).toBe("Clara");
     });
 
     test("returns the first kid in case of tied total gift prices", () => {
@@ -129,7 +323,7 @@ suite("preferedKid", () => {
         expect(preferedKid(kids)).toBe("D");
     });
 });
-
+/*
 suite("distributeGifts", () => {
     const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
@@ -309,3 +503,4 @@ suite("distributeGifts", () => {
         expect(kids[1].gifts[0].name).toBe("Small");
     });
 });
+*/

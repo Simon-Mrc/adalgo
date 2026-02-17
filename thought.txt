@@ -1,0 +1,11 @@
+error in test file for prefered kids .toBe("Amina");
+
+
+for last function : 
+most pricy item // function for that
+    then
+ who to give // update or just check total price for that kid ?
+    then
+give gift // update kids gifts and remove from original list
+
+so : 1 roll thgough gifts list   
